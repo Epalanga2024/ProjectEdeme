@@ -1,0 +1,917 @@
+/* =========================================================
+   SHOW COOKING ANGOLA — 3ª EDIÇÃO
+   Identidade: dourado #d1a769 · preto #000000
+   Tipografia: Sophia Francesca (títulos) · Poppins (texto)
+   ========================================================= */
+
+/* 1. FONTES
+   Sophia Francesca não existe no Google Fonts.
+   Coloque o ficheiro em assets/fonts/ (ver README.txt).
+   Enquanto não existir, o site usa Playfair Display como alternativa. */
+@font-face {
+  font-family: "Sophia Francesca";
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src:
+    local("Sophia Francesca"),
+    local("SophiaFrancesca-Regular"),
+    url("fonts/SophiaFrancesca-Regular.woff2") format("woff2"),
+    url("fonts/SophiaFrancesca-Regular.otf") format("opentype"),
+    url("fonts/SophiaFrancesca-Regular.ttf") format("truetype");
+}
+
+/* 2. VARIÁVEIS */
+:root {
+  /* Marca */
+  --gold: #d1a769;
+  --black: #000000;
+  --white: #ffffff;
+
+  /* Derivadas do dourado */
+  --gold-deep: #85601f;              /* texto dourado sobre fundo claro (contraste 5:1) */
+  --gold-line: rgba(209, 167, 105, 0.35);
+  --paper: #faf6f0;                  /* fundo claro (dourado a 10%) */
+  --paper-alt: #f4eadb;              /* fundo alternado (dourado a 25%) */
+
+  /* Texto */
+  --ink: #000000;
+  --muted: #6b645a;
+  --muted-light: #b9b3a9;
+  --line: rgba(209, 167, 105, 0.35);
+
+  /* Tipografia */
+  --font-display: "Sophia Francesca", "Playfair Display", Georgia, serif;
+  --font-body: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --header-h: 74px;
+}
+
+/* 3. RESET / BASE */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+
+section[id] { scroll-margin-top: var(--header-h); }
+
+:focus-visible {
+  outline: 2px solid var(--gold-deep);
+  outline-offset: 3px;
+}
+.site-header :focus-visible,
+.hero :focus-visible,
+.feature :focus-visible,
+footer :focus-visible { outline-color: var(--gold); }
+.edition-box :focus-visible { outline-color: var(--black); }
+
+/* 4. CABEÇALHO */
+.site-header {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px 5vw;
+
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid var(--gold-line);
+}
+
+.brand { display: flex; align-items: center; }
+
+.brand img {
+  height: 46px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 26px;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--white);
+}
+
+.site-header nav a {
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.25s ease;
+}
+
+.site-header nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.site-header nav a:hover { color: var(--gold); }
+.site-header nav a:hover::after { transform: scaleX(1); }
+
+/* 5. BOTÕES */
+.nav-cta,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 13px 24px;
+
+  background: var(--gold);
+  color: var(--black);
+
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.nav-cta:hover,
+.button:hover {
+  background: var(--white);
+  color: var(--black);
+  transform: translateY(-2px);
+}
+
+/* 6. HERO */
+.hero {
+  position: relative;
+
+  min-height: 100vh;
+
+  display: flex;
+  align-items: flex-end;
+
+  padding: 150px 8vw 9vh;
+
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.7) 45%, rgba(0, 0, 0, 0.35) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, transparent 45%),
+    url("gallery/SHOW-COOKING.webp") center / cover no-repeat,
+    var(--black);
+
+  color: var(--white);
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: radial-gradient(circle at 75% 45%, rgba(209, 167, 105, 0.16), transparent 35%);
+}
+
+.hero-content,
+.hero-note {
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow,
+.section-kicker {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.hero .eyebrow { color: var(--gold); }
+
+.hero h1 {
+  margin: 22px 0 25px;
+
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(64px, 11vw, 160px);
+
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.hero h1 em {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.hero h1 span {
+  display: block;
+  margin-top: 0.3em;
+
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.26em;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+}
+
+.hero-subtitle {
+  max-width: 520px;
+
+  font-size: 17px;
+  line-height: 1.7;
+  color: #e8e4de;
+}
+
+.event-meta {
+  display: flex;
+  gap: 40px;
+
+  margin: 32px 0;
+}
+
+.event-meta div {
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 14px;
+  border-left: 2px solid var(--gold);
+}
+
+.event-meta strong {
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.event-meta span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--gold);
+}
+
+.hero-note {
+  position: absolute;
+
+  right: 7vw;
+  bottom: 8vh;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+
+  writing-mode: vertical-rl;
+}
+
+/* 7. SECÇÕES GERAIS */
+.section { padding: 110px 8vw; }
+
+.section h2 {
+  margin: 0;
+
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 68px);
+
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.section-kicker { color: var(--gold-deep); }
+
+/* 8. INTRODUÇÃO */
+.split-grid,
+.experience-intro,
+.rsvp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6vw;
+
+  margin-top: 35px;
+  align-items: center;
+}
+
+.intro-copy {
+  margin-top: 32px;
+
+  color: var(--muted);
+
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+.intro-copy strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* 9. IMAGENS PRINCIPAIS */
+.feature-image {
+  position: relative;
+
+  margin: 0;
+
+  overflow: hidden;           /* recorta a imagem; a sombra dourada fica de fora */
+  background: var(--paper-alt);
+  aspect-ratio: 4 / 3;
+
+  box-shadow: 14px 14px 0 var(--gold-line);
+}
+
+.feature-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.feature-image:hover img { transform: scale(1.03); }
+
+/* 10. SECÇÃO EXPERIÊNCIA */
+.feature {
+  background: var(--black);
+  color: var(--white);
+}
+
+.feature .section-kicker { color: var(--gold); }
+
+.experience-intro {
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 5vw;
+
+  margin-top: 35px;
+  margin-bottom: 55px;
+}
+
+.experience-title { min-width: 0; }
+
+.feature-image-dark {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+
+  margin: 0;
+
+  overflow: hidden;
+  background: #111;
+  box-shadow: none;
+}
+
+.feature-image-dark img { object-position: center; }
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+
+  background: var(--gold-line);
+  overflow: hidden;
+}
+
+.feature-grid article {
+  min-width: 0;
+
+  padding: 0 32px 35px;
+
+  background: var(--black);
+  overflow: hidden;
+}
+
+.feature-card-image {
+  display: block;
+
+  width: calc(100% + 64px);
+  height: 230px;
+
+  margin: 0 -32px 30px;
+
+  object-fit: cover;
+  object-position: center;
+
+  background: #111;
+
+  transition: transform 0.5s ease;
+}
+
+.feature-grid article:hover .feature-card-image { transform: scale(1.03); }
+
+.feature-grid span {
+  display: block;
+
+  margin-bottom: 12px;
+
+  color: var(--gold);
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.feature-grid h3 {
+  margin: 0 0 12px;
+
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.feature-grid p {
+  margin: 0;
+
+  color: var(--muted-light);
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* 11. GALERIA */
+.gallery-heading {
+  max-width: 800px;
+  margin: 30px 0 55px;
+}
+
+.gallery-heading p {
+  margin-top: 18px;
+
+  color: var(--muted);
+
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr 0.75fr;
+  grid-auto-rows: 270px;
+  gap: 14px;
+}
+
+.gallery-card {
+  position: relative;
+
+  margin: 0;
+
+  overflow: hidden;
+  background: #111;
+}
+
+.gallery-card img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-card:hover img { transform: scale(1.04); }
+
+.gallery-card::after {
+  content: "";
+
+  position: absolute;
+  inset: 35% 0 0;
+
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  pointer-events: none;
+}
+
+.gallery-card figcaption {
+  position: absolute;
+  z-index: 2;
+
+  left: 20px;
+  bottom: 18px;
+
+  padding-left: 12px;
+  border-left: 2px solid var(--gold);
+
+  color: var(--white);
+
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+}
+
+.card-a { grid-row: span 2; }
+
+/* 12. PARCEIROS */
+.partners { background: var(--paper-alt); }
+
+.partners-heading {
+  max-width: 800px;
+  margin: 30px 0 50px;
+}
+
+.partners-heading p {
+  margin-top: 18px;
+
+  color: var(--muted);
+
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+/* 8 colunas: cada cartão ocupa 2, para centrar a última linha (11 logos = 4+4+3) */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 18px;
+}
+
+.partner-card {
+  grid-column: span 2;
+
+  height: 125px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+
+  background: transparent;
+  overflow: hidden;
+}
+
+.partner-card:nth-child(9) { grid-column: 2 / span 2; }
+
+.partner-card img {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 75%;
+  max-height: 75px;
+
+  object-fit: contain;
+
+  /* remove o branco incorporado nos ficheiros dos logótipos */
+  mix-blend-mode: multiply;
+
+  transition: transform 0.3s ease;
+}
+
+.partner-card:hover img { transform: scale(1.06); }
+
+/* 13. EDIÇÃO */
+.edition { padding-top: 30px; }
+
+.edition-box {
+  padding: 70px 8vw;
+
+  background: var(--gold);
+  color: var(--black);
+}
+
+.edition-box .eyebrow { color: var(--black); }
+
+.edition-box h2 {
+  max-width: 800px;
+  margin: 15px 0 20px;
+}
+
+.edition-box p:not(.eyebrow) {
+  max-width: 600px;
+
+  line-height: 1.75;
+}
+
+.edition-box .button {
+  margin-top: 15px;
+
+  background: var(--black);
+  color: var(--white);
+}
+
+.edition-box .button:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+/* 14. CONTACTO */
+.rsvp { border-top: 1px solid var(--line); }
+
+.rsvp p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.email-link {
+  display: inline-block;
+
+  margin-top: 25px;
+  padding-bottom: 3px;
+
+  color: var(--gold-deep);
+
+  font-weight: 600;
+  border-bottom: 1px solid var(--gold-line);
+
+  word-break: break-word;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.email-link:hover {
+  color: var(--black);
+  border-color: var(--gold);
+}
+
+.contact-brand {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-start;
+
+  min-height: 260px;
+
+  padding: 20px 0;
+}
+
+.contact-brand img {
+  display: block;
+
+  width: min(100%, 520px);
+  max-width: 520px;
+  height: auto;
+
+  object-fit: contain;
+  background: transparent;
+}
+
+/* 15. RODAPÉ */
+footer {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 0.5fr;
+  gap: 30px;
+
+  padding: 45px 8vw;
+
+  background: var(--black);
+  border-top: 1px solid var(--gold-line);
+
+  color: var(--white);
+
+  font-size: 12px;
+
+  align-items: center;
+}
+
+footer div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+footer .footer-brand {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+/* o logótipo EDEME é escuro: apoia-se numa base clara para ser legível */
+footer .footer-brand img {
+  display: block;
+
+  width: 200px;
+  max-width: 100%;
+  height: auto;
+
+  padding: 10px 16px;
+
+  background: var(--paper);
+  border-radius: 6px;
+}
+
+footer span,
+footer a { color: var(--muted-light); }
+
+.footer-contact a:hover { color: var(--gold); }
+
+/* 16. REDES SOCIAIS */
+.socials {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.socials a {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.socials a:hover {
+  background: var(--gold);
+  transform: translateY(-2px);
+}
+
+.socials svg {
+  width: 19px;
+  height: 19px;
+
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.8;
+
+  transition: stroke 0.25s ease, fill 0.25s ease;
+}
+
+.socials a:first-child svg { fill: var(--gold); stroke: none; }
+.socials .fill-dot { fill: var(--gold); stroke: none; }
+
+.socials a:hover svg { stroke: var(--black); }
+.socials a:first-child:hover svg,
+.socials a:hover .fill-dot { fill: var(--black); }
+
+/* 17. TABLET */
+@media (max-width: 1050px) {
+  .site-header nav { gap: 16px; }
+
+  .partners-grid { grid-template-columns: repeat(6, 1fr); }
+  .partner-card:nth-child(9) { grid-column: span 2; }
+  .partner-card:nth-child(10) { grid-column: 2 / span 2; }
+  .partner-card { height: 120px; }
+  .partner-card img { max-width: 78%; max-height: 70px; }
+
+  .experience-intro {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .feature-grid article {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  .feature-card-image {
+    width: calc(100% + 50px);
+    height: 200px;
+
+    margin-left: -25px;
+    margin-right: -25px;
+  }
+}
+
+/* 18. MOBILE */
+@media (max-width: 800px) {
+  .site-header nav { display: none; }
+
+  .nav-cta { padding: 10px 16px; }
+
+  .hero { padding: 130px 7vw 65px; }
+
+  .hero-note { display: none; }
+
+  .split-grid,
+  .experience-intro,
+  .rsvp-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .feature-image { box-shadow: 10px 10px 0 var(--gold-line); }
+
+  .experience-intro { margin-bottom: 40px; }
+
+  .feature-grid { grid-template-columns: 1fr; }
+
+  .feature-grid article {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 32px;
+  }
+
+  .feature-card-image {
+    width: calc(100% + 48px);
+    height: 240px;
+
+    margin-left: -24px;
+    margin-right: -24px;
+    margin-bottom: 26px;
+  }
+
+  .feature-grid h3 { font-size: 30px; }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 220px;
+  }
+
+  .card-a { grid-row: span 1; }
+
+  .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .partner-card,
+  .partner-card:nth-child(9),
+  .partner-card:nth-child(10) {
+    grid-column: auto;
+    height: 115px;
+    padding: 12px;
+  }
+
+  .partner-card:last-child { grid-column: 1 / -1; }
+
+  .partner-card img { max-width: 82%; max-height: 68px; }
+
+  .contact-brand {
+    min-height: 180px;
+    justify-content: center;
+  }
+
+  .contact-brand img { width: min(90%, 430px); }
+
+  footer { grid-template-columns: 1fr; }
+
+  .socials { justify-content: flex-start; }
+
+  .section { padding: 80px 7vw; }
+}
+
+/* 19. TELEMÓVEIS PEQUENOS */
+@media (max-width: 520px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+
+  .partner-card {
+    height: 105px;
+    padding: 10px;
+  }
+
+  .partner-card img { max-width: 85%; max-height: 62px; }
+
+  .brand img {
+    max-width: 130px;
+    height: 40px;
+  }
+
+  .hero h1 { font-size: 62px; }
+
+  .event-meta { gap: 28px; }
+
+  .experience-intro { gap: 25px; }
+
+  .feature-card-image { height: 210px; }
+
+  .feature-grid h3 { font-size: 28px; }
+
+  .contact-brand { min-height: 150px; }
+
+  .contact-brand img { width: min(95%, 360px); }
+}
+
+/* 20. ACESSIBILIDADE: sem animações para quem as desativa */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
